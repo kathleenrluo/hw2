@@ -16,14 +16,27 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
 
-
-
-
-
-
-
-
-
+    set<string> words;
+    while(!rawWords.empty())
+    {
+        for(int i=0; i<int(rawWords.length());++i)
+        {
+            if (ispunct(rawWords[i])||rawWords[i]==' '||rawWords[i]=='\0')
+            {
+                if(i>1)
+                {
+                    words.insert(rawWords.substr(0,i));
+                    rawWords=rawWords.substr(i+1);
+                }
+                else
+                {
+                    rawWords=rawWords.substr(i+1);
+                    continue;
+                }
+            }
+        }
+    }
+    return words;
 
 }
 
