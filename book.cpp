@@ -3,7 +3,7 @@
 #include <sstream>
 using namespace std;
 
-book::book(const string category, const string name, double price, int qty, const string author, const string isbn):
+book::book(const string category, const string name, double price, int qty, const string isbn, const string author):
     Product(category, name, price, qty),
     author_(author),
     isbn_(isbn)
@@ -18,9 +18,11 @@ book::~book()
 
 set<string> book::keywords () const
 {
-    set<string> keys = parseStringToWords(name_);
-    set<string> auth = parseStringToWords(author_);
-    keys = setUnion(keys, auth);
+    /*string all = convToLower(name_)+" "+convToLower(author_);
+    set<string> keys = parseStringToWords(all);*/
+    set<string> nam = parseStringToWords(convToLower(name_));
+    set<string> auth = parseStringToWords(convToLower(author_));
+    set<string> keys = setUnion(nam, auth);
     keys.insert(isbn_);
     return keys;
 }
@@ -32,11 +34,11 @@ string book::displayString() const
     //<price> <quantity> left.
     ostringstream dis;
     dis << getName() << "\nAuthor: " << author_ << " ISBN: " << isbn_
-    << "\n" << getPrice() << " " << getQty() << " left.\n";
+    << "\n" << setprecision(2) << fixed << getPrice() << " " << getQty() << " left.\n";
     return dis.str();
 }
 
 void book::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << isbn_ << "\n" << author_ << endl;
+    os << category_ << "\n" << name_ << "\n" << setprecision(2) << fixed << price_ << "\n" << qty_ << "\n" << isbn_ << "\n" << author_ << endl;
 }

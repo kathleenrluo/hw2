@@ -18,8 +18,8 @@ clothing::~clothing()
 
 set<string> clothing::keywords () const
 {
-    set<string> keys = parseStringToWords(name_);
-    set<string> bra = parseStringToWords(brand_);
+    set<string> keys = parseStringToWords(convToLower(name_));
+    set<string> bra = parseStringToWords(convToLower(brand_));
     return setUnion(keys, bra);
 }
 
@@ -30,11 +30,11 @@ string clothing::displayString() const
     //<price> <quantity> left.
     ostringstream dis;
     dis << getName() << "\nSize: " << size_ << " Brand: " << brand_
-    << "\n" << getPrice() << " " << getQty() << " left.\n";
+    << "\n" << setprecision(2) << fixed << getPrice() << " " << getQty() << " left.\n";
     return dis.str();
 }
 
 void clothing::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << endl;
+    os << category_ << "\n" << name_ << "\n" << setprecision(2) << fixed << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << endl;
 }

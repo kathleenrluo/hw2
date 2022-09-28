@@ -18,8 +18,8 @@ movie::~movie()
 
 set<string> movie::keywords () const
 {
-    set<string> keys = parseStringToWords(name_);
-    set<string> gen = parseStringToWords(genre_);
+    set<string> keys = parseStringToWords(convToLower(name_));
+    set<string> gen = parseStringToWords(convToLower(genre_));
     return setUnion(keys, gen);
 }
 
@@ -30,11 +30,11 @@ string movie::displayString() const
     //<price> <quantity> left.
     ostringstream dis;
     dis << getName() << "\nGenre: " << genre_ << " Rating: " << rating_
-    << "\n" << getPrice() << " " << getQty() << " left.\n";
+    << "\n"  << setprecision(2) << fixed << getPrice() << " " << getQty() << " left.\n";
     return dis.str();
 }
 
 void movie::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << genre_ << "\n" << rating_ << endl;
+    os << category_ << "\n" << name_ << "\n" << setprecision(2) << fixed << price_ << "\n" << qty_ << "\n" << genre_ << "\n" << rating_ << endl;
 }
