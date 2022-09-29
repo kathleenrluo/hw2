@@ -125,7 +125,6 @@ void MyDataStore::viewCart(std::string username)
         deque<Product*> temp = cart.find(username)->second;
         for(deque<Product*>::iterator it=temp.begin(); it!=temp.end(); ++it)
         {
-            //cout<<count<<": "<< ((*it)->getName())<<"\n";
             cout<<count<<": "<< (*it)->displayString();
             ++count;
         }
