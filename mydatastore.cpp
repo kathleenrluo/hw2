@@ -91,7 +91,7 @@ void MyDataStore::dump(std::ostream& ofile)
     {
         (itP->second->dump(ofile));
     }
-    ofile << "</products>\n<users>";
+    ofile << "</products>\n<users>\n";
     for(map<string, User*>::iterator itU = people.begin(); itU!=people.end(); itU++)
     {
         (itU->second->dump(ofile));
